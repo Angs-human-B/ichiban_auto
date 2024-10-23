@@ -41,7 +41,7 @@ class _LogInTextFieldState extends State<LogInTextField> {
               return 'Password must be at least 6 characters';
             }
           }
-          if (widget.labelText != "Password" &&
+          if (widget.labelText == "Email" &&
               !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
             return 'Please enter a valid email address';
           }
