@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:ichiban_auto/Screens/bookingCelenderScreen.dart';
 import 'package:provider/provider.dart';
 
 import 'Screens/homePage.dart';
@@ -44,11 +45,13 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           title: 'IchibanAuto',
-          initialRoute: '/logInScreen',
+          initialRoute: '/bookingCelenderScreen',
           routes: {
-            '/homeScreen': (context) => const HomeScreen1(),
             '/logInScreen': (context) => const LogInScreen(),
             '/signUpScreen': (context) => const SignUpScreen(),
+            '/bookingCelenderScreen': (context) => const BookingCelenderScreen(),
+            '/homeScreenn': (context) => const HomeScreen1(),
+
           },
         );
       },

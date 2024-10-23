@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../Providers/auth_provider.dart';
 import '../Widgets/LogInTextField.dart';
 import '../common.dart';
-import 'homePage.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -114,7 +113,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           _passwordController.text.trim(),
                         );
                         if (success) {
-                          Navigator.pushReplacementNamed(context, '/homeScreen');
+                          Navigator.of(context).pushReplacementNamed( '/bookingCelenderScreen');
 
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

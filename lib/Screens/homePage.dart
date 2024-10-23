@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen1> {
             icon: const Icon(Icons.logout),
             onPressed: () {
               _authProvider.logout(); // Uncomment this line to call the logout method
-              Navigator.pushReplacementNamed(context, '/logInScreen');
+              Navigator.of(context).pushReplacementNamed('/logInScreen');
             },
           ),
         ],

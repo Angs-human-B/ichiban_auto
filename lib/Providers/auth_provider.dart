@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/userModel.dart';
 import '../services/auth_service.dart';
 
@@ -21,7 +21,7 @@ class AuthProvider extends ChangeNotifier {
     final userModel = await _authService.signInWithEmail(email, password);
     if (userModel != null) {
       _user = userModel;
-      // await _saveUserLocally(userModel);
+      await _saveUserLocally(userModel);
       _isLoading = false;
       notifyListeners();
       return true;
@@ -33,19 +33,20 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // Future<void> _saveUserLocally(UserModel userModel) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   await prefs.setString('user', userModel.toJson());
-  // }
+  Future<void> _saveUserLocally(UserModel userModel) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(userModel.toJson());
+    await prefs.setString('user', userModel.toJson());
+  }
 
-  // Future<void> loadUser() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? userJson = prefs.getString('user');
-  //   if (userJson != null) {
-  //     _user = UserModel.fromJson(userJson);
-  //     notifyListeners();
-  //   }
-  // }
+  Future<void> loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userJson = prefs.getString('user');
+    if (userJson != null) {
+      _user = UserModel.fromJson(userJson);
+      notifyListeners();
+    }
+  }
 
   Future<bool> signUp({required String name, required String phone, required String email, required String password, required String role}) async {
     _isLoading = true;
@@ -72,8 +73,8 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> logout() async {
     await _authService.signOut();
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.remove('user');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('user');
     _user = null;
     notifyListeners();
   }
