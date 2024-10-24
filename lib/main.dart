@@ -5,6 +5,8 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:ichiban_auto/Screens/bookingCelenderScreen.dart';
 import 'package:provider/provider.dart';
 
+import 'Providers/booking_provider.dart';
+import 'Screens/bookingCelenderScreen2.dart';
 import 'Screens/homePage.dart';
 import 'Screens/signUpScreen.dart';
 import 'Screens/logInScreen.dart';
@@ -18,6 +20,7 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => BookingProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: const MyApp(),

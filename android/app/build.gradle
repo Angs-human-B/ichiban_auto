@@ -28,7 +28,9 @@ if (flutterVersionName == null) {
 android {
     namespace "com.example.ichiban_auto"
     compileSdk flutter.compileSdkVersion
-    ndkVersion 25.1.8937393
+//    ndkVersion 28.0.12433566
+//    ndkVersion 25.1.8937393
+//    ndkVersion flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
