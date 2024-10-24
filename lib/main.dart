@@ -6,6 +6,7 @@ import 'package:ichiban_auto/Screens/bookingCelenderScreen.dart';
 import 'package:provider/provider.dart';
 
 import 'Providers/booking_provider.dart';
+import 'Screens/addBookingScreen.dart';
 import 'Screens/bookingCelenderScreen2.dart';
 import 'Screens/homePage.dart';
 import 'Screens/signUpScreen.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
             '/signUpScreen': (context) => const SignUpScreen(),
             '/bookingCelenderScreen': (context) => const BookingCelenderScreen(),
             '/homeScreenn': (context) => const HomeScreen1(),
+            '/addBookingScreen': (context) => const AddBookingScreen(),
 
           },
         );

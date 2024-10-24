@@ -16,4 +16,12 @@ class BookingService {
       throw Exception('Failed to load bookings: $e');
     }
   }
+  Future<void> addBookingToFirestore(BookingEvent booking) async {
+    try {
+      var x= await _firestore.collection('bookings').add(booking.toMap());
+      print(x.id);
+    } catch (e) {
+      throw Exception('Failed to add booking: $e');
+    }
+  }
 }

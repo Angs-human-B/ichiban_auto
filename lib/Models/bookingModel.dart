@@ -9,7 +9,7 @@ class BookingEvent extends CalendarEventData {
   final String customerName;
   final String customerPhone;
   final String customerEmail;
-  final String bookingTittle;
+  final String bookingTitle;
   final String startDateTime;
   final String endDateTime;
   final String assignedMechanic;
@@ -24,7 +24,7 @@ class BookingEvent extends CalendarEventData {
     required this.customerName,
     required this.customerPhone,
     required this.customerEmail,
-    required this.bookingTittle,
+    required this.bookingTitle,
     required this.startDateTime,
     required this.endDateTime,
     required this.assignedMechanic,
@@ -56,10 +56,25 @@ class BookingEvent extends CalendarEventData {
       customerName: data['customerName'],
       customerPhone: data['customerPhone'],
       customerEmail: data['customerEmail'],
-      bookingTittle: data['bookingTitle'],
+      bookingTitle: data['bookingTitle'],
       startDateTime: data['startDateTime'],
       endDateTime: data['endDateTime'],
       assignedMechanic: data['assignedMechanic'],
     );
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      'bookingTitle': bookingTitle,
+      'carMake': carMake,
+      'carModel': carModel,
+      'year': year,
+      'registrationPlate': registrationPlate,
+      'customerName': customerName,
+      'customerPhone': customerPhone,
+      'customerEmail': customerEmail,
+      'startDateTime': startDateTime,
+      'endDateTime': endDateTime,
+      'assignedMechanic': assignedMechanic,
+    };
   }
 }

@@ -31,7 +31,7 @@ class BookingProvider with ChangeNotifier {
           CalendarEventData<BookingEvent>(
             date: booking.date,
             event: booking,
-            title: booking.bookingTittle,
+            title: booking.bookingTitle,
             startTime: DateTime.parse(booking.startDateTime),
             endTime: DateTime.parse(booking.endDateTime),
             description: booking.title,
@@ -51,7 +51,21 @@ class BookingProvider with ChangeNotifier {
 
   Future<void> addBooking(BookingEvent booking) async {
     try {
-      _eventController.add(booking as CalendarEventData<BookingEvent>);
+      // Add to Firestore
+      await _bookingService.addBookingToFirestore(booking);
+
+      //local state
+      _eventController.add(
+        CalendarEventData<BookingEvent>(
+          date: booking.date,
+          event: booking,
+          title: booking.bookingTitle,
+          startTime: DateTime.parse(booking.startDateTime),
+          endTime: DateTime.parse(booking.endDateTime),
+          description: booking.title,
+        ),
+      );
+
       _bookings.add(booking);
       notifyListeners();
     } catch (e) {
