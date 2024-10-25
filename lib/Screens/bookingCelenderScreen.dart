@@ -42,11 +42,10 @@ class _BookingCelenderScreenState extends State<BookingCelenderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: InkWell(
-          onTap: () {
-            print(bookingProvider.isLoading);
-          },
-          child: Text('Car Service Bookings'),
+        centerTitle: true,
+        title: Image.asset(
+          'assets/logo/ichibanAutoLogo.png',
+          width: 350.w,
         ),
       ),
       floatingActionButton: authProvider.user?.role == "Admin"
@@ -60,11 +59,7 @@ class _BookingCelenderScreenState extends State<BookingCelenderScreen> {
               child: Icon(Icons.add, color: textFieldFill, size: 60.sp),
             )
           : null,
-      body:
-          // bookingProvider.isLoading
-          //     ? const Center(child: CircularProgressIndicator())
-          //     :
-          CalendarControllerProvider<BookingEvent>(
+      body: CalendarControllerProvider<BookingEvent>(
         controller: bookingProvider.eventController,
         child: MonthView<BookingEvent>(
           onEventTap: (events, date) {
@@ -77,6 +72,9 @@ class _BookingCelenderScreenState extends State<BookingCelenderScreen> {
               );
             }
           },
+          startDay: WeekDays.sunday,
+          headerStyle:
+              const HeaderStyle(decoration: BoxDecoration(color: Colors.white),),
         ),
       ),
     );
