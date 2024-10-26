@@ -8,7 +8,9 @@ A mobile application developed using Flutter for car servicing bookings.
 
 ## Getting Started
 
-This project serves as a complete car servicing booking application. Note: SignUp as an ADMIN(by checking the check box in SignUpScreen) to view all the bookings. Else You will be Signed Up as a Mechanic. Below are the steps to set up and run the project on your local machine.
+This project serves as a complete car servicing booking application. 
+- **Note: SignUp as an ADMIN(by checking the check box in SignUpScreen) to view all the bookings. Else You will be Signed Up as a Mechanic.**
+  Below are the steps to set up and run the project on your local machine.
 
 ### Prerequisites
 
