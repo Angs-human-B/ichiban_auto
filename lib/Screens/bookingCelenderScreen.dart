@@ -1,25 +1,27 @@
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ichiban_auto/common.dart';
 import 'package:provider/provider.dart';
 
 import '../Models/bookingModel.dart';
 import '../Providers/auth_provider.dart';
+import '../Widgets/calenderViewWidget.dart';
 import '../Providers/booking_provider.dart';
-import '../Widgets/bookingDetailsDialog.dart';
+import '../Widgets/userDrawer.dart';
+import '../common.dart';
 
-class BookingCelenderScreen extends StatefulWidget {
-  const BookingCelenderScreen({super.key});
+class BookingCalendarScreen extends StatefulWidget {
+  const BookingCalendarScreen({super.key});
 
   @override
-  State<BookingCelenderScreen> createState() => _BookingCelenderScreenState();
+  State<BookingCalendarScreen> createState() => _BookingCalendarScreenState();
 }
 
-class _BookingCelenderScreenState extends State<BookingCelenderScreen> {
+class _BookingCalendarScreenState extends State<BookingCalendarScreen> {
   late BookingProvider bookingProvider;
   late AuthProvider authProvider;
   bool _isInitialized = false;
+  String _selectedView = 'Month';
 
   @override
   void didChangeDependencies() {
@@ -35,18 +37,31 @@ class _BookingCelenderScreenState extends State<BookingCelenderScreen> {
 
   Future<void> initFunc() async {
     await authProvider.loadUser();
-    await bookingProvider.loadBookings();
+    await bookingProvider.loadBookings(authProvider.user!.role,authProvider.user!.name);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         title: Image.asset(
           'assets/logo/ichibanAutoLogo.png',
-          width: 350.w,
+          width: 390.w,
         ),
+        actions: [
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: Icon(Icons.account_circle, size: 52.sp),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+              );
+            },
+          ),
+        ],
       ),
       floatingActionButton: authProvider.user?.role == "Admin"
           ? FloatingActionButton(
@@ -55,28 +70,58 @@ class _BookingCelenderScreenState extends State<BookingCelenderScreen> {
               },
               backgroundColor: buttonRed,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.sp)),
-              child: Icon(Icons.add, color: textFieldFill, size: 60.sp),
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: const Icon(Icons.add, color: Colors.white, size: 24),
             )
           : null,
-      body: CalendarControllerProvider<BookingEvent>(
-        controller: bookingProvider.eventController,
-        child: MonthView<BookingEvent>(
-          onEventTap: (events, date) {
-            if (events.title.isNotEmpty && events.event is BookingEvent) {
-              showDialog(
-                context: context,
-                builder: (context) => BookingDetailsDialog(
-                  booking: events.event as BookingEvent,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ToggleButtons(
+              isSelected: [
+                _selectedView == 'Day',
+                _selectedView == 'Week',
+                _selectedView == 'Month',
+              ],
+              onPressed: (index) {
+                setState(() {
+                  _selectedView = index == 0
+                      ? 'Day'
+                      : index == 1
+                          ? 'Week'
+                          : 'Month';
+                });
+              },
+              children: const [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Day'),
                 ),
-              );
-            }
-          },
-          startDay: WeekDays.sunday,
-          headerStyle:
-              const HeaderStyle(decoration: BoxDecoration(color: Colors.white),),
-        ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Week'),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Month'),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: CalendarControllerProvider<BookingEvent>(
+              controller: bookingProvider.eventController,
+              child: CalendarViewWidget(
+                selectedView: _selectedView,
+                bookingProvider: bookingProvider,
+              ),
+            ),
+          ),
+        ],
       ),
+      endDrawer: const UserDrawer(),
     );
   }
 }

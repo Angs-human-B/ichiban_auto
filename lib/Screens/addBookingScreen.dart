@@ -24,6 +24,7 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
   final _customerPhoneController = TextEditingController();
   final _customerEmailController = TextEditingController();
   final _bookingTitleController = TextEditingController();
+  final _workCheckListController = TextEditingController();
   final _mechanicController = TextEditingController();
 
   DateTime? _startDateTime;
@@ -41,6 +42,11 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
     _bookingTitleController.dispose();
     _mechanicController.dispose();
     super.dispose();
+  }
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<BookingProvider>(context, listen: false).fetchAvailableMechanics();
   }
 
   Future<void> _selectDateTime(BuildContext context,
@@ -96,6 +102,7 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
       customerPhone: _customerPhoneController.text.trim(),
       customerEmail: _customerEmailController.text.trim(),
       bookingTitle: _bookingTitleController.text.trim(),
+      workCheckList: _workCheckListController.text,
       startDateTime: _startDateTime!.toIso8601String(),
       endDateTime: _endDateTime!.toIso8601String(),
       assignedMechanic: _mechanicController.text.trim(),
@@ -162,6 +169,8 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
             BookingTextField(
                 controller: _bookingTitleController, label: 'Booking Title'),
             SizedBox(height: 12.h),
+            BookingTextField(
+                controller: _workCheckListController, label: 'WorkCheckList'),
             ListTile(
               dense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 8.w),

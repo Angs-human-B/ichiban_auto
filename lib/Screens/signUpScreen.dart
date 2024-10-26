@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../Providers/auth_provider.dart';
 import '../Widgets/LogInTextField.dart';
 import '../common.dart';
-import 'homePage.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

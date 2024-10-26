@@ -1,4 +1,5 @@
 import 'package:calendar_view/calendar_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/bookingModel.dart';
@@ -16,17 +17,25 @@ class BookingProvider with ChangeNotifier {
   List<BookingEvent> _bookings = [];
   List<BookingEvent> get bookings => _bookings;
 
-  Future<void> loadBookings() async {
+  List<String> _availableMechanics = [];
+  List<String> get availableMechanics => _availableMechanics;
+
+  Future<void> loadBookings(String userRole, String userName) async {
     _isLoading = true;
     notifyListeners();
 
     try {
       final fetchedBookings = await _bookingService.fetchBookings();
-      _bookings = fetchedBookings;
+
+      // Filter
+      if (userRole == 'Mechanic') {
+        _bookings = fetchedBookings.where((booking) => booking.assignedMechanic == userName).toList();
+      } else {
+        _bookings = fetchedBookings; // Admin can see all bookings
+      }
 
       _eventController.removeAll(_eventController.allEvents);
       for (var booking in _bookings) {
-        // _eventController.add(booking as CalendarEventData<BookingEvent>);
         _eventController.add(
           CalendarEventData<BookingEvent>(
             date: booking.date,
@@ -48,6 +57,7 @@ class BookingProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
 
   Future<void> addBooking(BookingEvent booking) async {
     try {
@@ -86,6 +96,22 @@ class BookingProvider with ChangeNotifier {
     if (index != -1) {
       _bookings[index] = updatedBooking;
       notifyListeners();
+    }
+  }
+  Future<void> fetchAvailableMechanics() async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('role', isEqualTo: 'Mechanic')
+          .get();
+
+      _availableMechanics = snapshot.docs
+          .map((doc) => doc.data()['name'] as String)
+          .toList();
+
+      notifyListeners();
+    } catch (e) {
+      print('Failed to fetch mechanics: $e');
     }
   }
 }

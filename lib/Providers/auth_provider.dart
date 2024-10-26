@@ -37,6 +37,7 @@ class AuthProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(userModel.toJson());
     await prefs.setString('user', userModel.toJson());
+    await prefs.setBool('isLoggedIn', true);
   }
 
   Future<void> loadUser() async {

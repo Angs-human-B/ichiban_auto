@@ -7,11 +7,10 @@ import 'package:provider/provider.dart';
 
 import 'Providers/booking_provider.dart';
 import 'Screens/addBookingScreen.dart';
-import 'Screens/bookingCelenderScreen2.dart';
-import 'Screens/homePage.dart';
 import 'Screens/signUpScreen.dart';
 import 'Screens/logInScreen.dart';
 import 'Providers/auth_provider.dart';
+import 'Screens/splashScreen.dart';
 import 'common.dart';
 import 'firebase_options.dart';
 
@@ -49,12 +48,12 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           title: 'IchibanAuto',
-          initialRoute: '/bookingCelenderScreen',
+          initialRoute: '/',
           routes: {
+            '/': (context) => const SplashScreen(),
             '/logInScreen': (context) => const LogInScreen(),
             '/signUpScreen': (context) => const SignUpScreen(),
-            '/bookingCelenderScreen': (context) => const BookingCelenderScreen(),
-            '/homeScreenn': (context) => const HomeScreen1(),
+            '/bookingCelenderScreen': (context) => const BookingCalendarScreen(),
             '/addBookingScreen': (context) => const AddBookingScreen(),
 
           },
