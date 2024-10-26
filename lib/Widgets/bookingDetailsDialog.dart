@@ -13,7 +13,7 @@ class BookingDetailsDialog extends StatelessWidget {
     return AlertDialog(
       title: Text(
         'Booking Details',
-        style: TextStyle(fontSize: 26,color: textRed),
+        style: TextStyle(fontSize: 28,color: textRed),
       ),
       content: SingleChildScrollView(
         child: Column(
@@ -22,60 +22,61 @@ class BookingDetailsDialog extends StatelessWidget {
           children: [
             Text(
               'Title: ${booking.title}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 2),
+            const Divider(),
+            const SizedBox(height: 2),
             Text(
               'Car Make: ${booking.carMake}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
             Text(
               'Car Model: ${booking.carModel}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
             Text(
               'Year: ${booking.year}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
             Text(
               'Registration Plate: ${booking.registrationPlate}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
-            const SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 2),
+            const Divider(),
+            const SizedBox(height: 2),            Text(
               'Customer Name: ${booking.customerName}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
             Text(
               'Customer Phone: ${booking.customerPhone}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
             Text(
               'Customer Email: ${booking.customerEmail}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Booking Title: ${booking.bookingTitle}',
-              style: const TextStyle(fontSize: 16),
-            ),
+            const SizedBox(height: 2),
+            const Divider(),
+            const SizedBox(height: 2),
             Text(
               'Start DateTime: ${booking.startDateTime}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
             Text(
               'End DateTime: ${booking.endDateTime}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
-            const SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 2),
+            const Divider(),
+            const SizedBox(height: 2),            Text(
               'Assigned Mechanic: ${booking.assignedMechanic}',
-              style: const TextStyle(fontSize: 16),
+              style: bookingDetailsTextStyle,
             ),
-            const SizedBox(height: 8),
             Text(
-              'Date: ${booking.date.toLocal()}',
-              style: const TextStyle(fontSize: 16),
+              'Work Details: ${booking.workCheckList}',
+              style: bookingDetailsTextStyle,
             ),
           ],
         ),

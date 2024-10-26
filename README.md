@@ -37,4 +37,15 @@ dependencies:
   calendar_view: ^1.2.0
   get: ^4.6.6
   intl: ^0.19.0
+  ```
+## Screenshots
+
+![SignUpScreen](assets/screenshots/Screenshot_20241027_022040.png)
+![LogInScreen](assets/screenshots/Screenshot_20241027_022031.png)
+![BookingCalenderView-Monthly](assets/screenshots/Screenshot_20241027_021858.png)
+![BookingCalenderView-Daily](assets/screenshots/Screenshot_20241027_021917.png)
+![BookingDetailsDialogue](assets/screenshots/Screenshot_20241027_021802.png)
+![CreateBookingScreen](assets/screenshots/Screenshot_20241027_022015.png)
+![CreateBookingScreen-TimeSelection](assets/screenshots/Screenshot_20241027_022004.png)
+![UserDrawer](assets/screenshots/Screenshot_20241027_021935.png)
 
